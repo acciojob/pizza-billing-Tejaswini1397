@@ -39,10 +39,10 @@ public class Pizza {
 
     public void addExtraCheese(){
         if(!isCheeseAdded){
-            if(isVeg){
+
                 total+=cheesePrice;
                 isCheeseAdded=true;
-            }
+
         }
     }
 

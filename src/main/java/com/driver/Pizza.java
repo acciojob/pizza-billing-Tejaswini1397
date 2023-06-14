@@ -7,7 +7,7 @@ public class Pizza {
     private int price;
     private int vegToppingPrice;
 
-    private int NonVegToppingPrice;
+    private int nonVegToppingPrice;
 
     private int cheesePrice=80;
 
@@ -28,7 +28,7 @@ public class Pizza {
            total=300;
         }else{
             price=400;
-            NonVegToppingPrice=120;
+            nonVegToppingPrice=120;
             total=400;
         }
     }
@@ -38,51 +38,55 @@ public class Pizza {
     }
 
     public void addExtraCheese(){
-        if(!isCheeseAdded){
-
-                total+=cheesePrice;
-                isCheeseAdded=true;
-
+        if (!isCheeseAdded) {
+            total += cheesePrice;
+            isCheeseAdded = true;
         }
     }
 
     public void addExtraToppings(){
-        if(!isToppingsAdded) {
+        if (!isToppingsAdded) {
             if (isVeg) {
                 total += vegToppingPrice;
+                isToppingsAdded = true;
             } else {
-                total += NonVegToppingPrice;
+                total += nonVegToppingPrice;
+                isToppingsAdded = true;
             }
-            isToppingsAdded=true;
-
         }
+
     }
 
     public void addTakeaway(){
-        if(!isTakeAwayAdded){
-            total+=bagPrice;
-            isTakeAwayAdded=true;
+        if (!isTakeAwayAdded) {
+            total += bagPrice;
+            isTakeAwayAdded = true;
         }
     }
 
     public String getBill(){
-       this.bill = "Base Price Of The Pizza: " + price + "\n";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Base Price Of The Pizza: ").append(price).append("\n");
 
-        if(isCheeseAdded) // add in bill if he opted for extra cheese,
-            bill = bill + "Extra Cheese Added: " + cheesePrice + "\n";
+        if (isCheeseAdded) {
+            sb.append("Extra Cheese Added: ").append(cheesePrice).append("\n");
+        }
 
-        if(isToppingsAdded) // add if he opted for extra toppings
-            if(isVeg)
-            bill = bill + "Extra Toppings Added: " + vegToppingPrice+ "\n";
-        else {
-                bill = bill + "Extra Toppings Added: " + NonVegToppingPrice+ "\n";
+        if (isToppingsAdded) {
+            if (isVeg) {
+                sb.append("Extra Toppings Added: ").append(vegToppingPrice).append("\n");
+            } else {
+                sb.append("Extra Toppings Added: ").append(nonVegToppingPrice).append("\n");
             }
+        }
 
-        if(isTakeAwayAdded) // if he is opted for takeaway
-            bill = bill + "Paperbag Added: " + bagPrice + "\n";
+        if (isTakeAwayAdded) {
+            sb.append("Paperbag Added: ").append(bagPrice).append("\n");
+        }
 
-        bill = bill + "Total Price: " + total;
+        sb.append("Total Price: ").append(total);
 
-        return bill;
+        return sb.toString();
+
     }
 }

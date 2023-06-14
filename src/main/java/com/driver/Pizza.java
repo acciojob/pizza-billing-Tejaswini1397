@@ -5,9 +5,9 @@ import com.sun.jdi.PrimitiveValue;
 public class Pizza {
 
     private int price;
-    private int toppingPrice;
+    private int vegToppingPrice;
 
-    //private int NonVegToppingPrice;
+    private int NonVegToppingPrice;
 
     private int cheesePrice=80;
 
@@ -24,11 +24,11 @@ public class Pizza {
         this.isVeg = isVeg;
         if(isVeg){
            price=300;
-            toppingPrice=70;
+            vegToppingPrice=70;
            total=300;
         }else{
             price=400;
-            toppingPrice=120;
+            NonVegToppingPrice=120;
             total=400;
         }
     }
@@ -49,7 +49,9 @@ public class Pizza {
     public void addExtraToppings(){
         if(!isToppingsAdded) {
             if (isVeg) {
-                total +=toppingPrice;
+                total += vegToppingPrice;
+            } else {
+                total += NonVegToppingPrice;
             }
             isToppingsAdded=true;
 
@@ -57,7 +59,7 @@ public class Pizza {
     }
 
     public void addTakeaway(){
-        if(isTakeAwayAdded){
+        if(!isTakeAwayAdded){
             total+=bagPrice;
             isTakeAwayAdded=true;
         }
@@ -70,13 +72,17 @@ public class Pizza {
             bill = bill + "Extra Cheese Added: " + cheesePrice + "\n";
 
         if(isToppingsAdded) // add if he opted for extra toppings
-            bill = bill + "Extra Toppings Added: " + toppingPrice+ "\n";
+            if(isVeg)
+            bill = bill + "Extra Toppings Added: " + vegToppingPrice+ "\n";
+        else {
+                bill = bill + "Extra Toppings Added: " + NonVegToppingPrice+ "\n";
+            }
 
         if(isTakeAwayAdded) // if he is opted for takeaway
             bill = bill + "Paperbag Added: " + bagPrice + "\n";
 
         bill = bill + "Total Price: " + total;
 
-        return this.bill;
+        return bill;
     }
 }

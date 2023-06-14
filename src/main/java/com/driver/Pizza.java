@@ -84,7 +84,7 @@ public class Pizza {
             sb.append("Paperbag Added: ").append(bagPrice).append("\n");
         }
 
-        sb.append("Total Price: ").append(total);
+        sb.append("Total Price: ").append(total).append("\n");
 
         return sb.toString();
 
